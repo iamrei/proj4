@@ -720,8 +720,6 @@ def interactive_prompt():
         else:
             print('Command not recognized:', response) 
 
-## create a unittesting file
-## revise the Readme file 
 
 
 if __name__ == '__main__':
