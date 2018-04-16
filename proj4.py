@@ -38,6 +38,17 @@ try:
 except:
     CACHE_DICTION_2 = {}    
 
+
+class Restaurant():
+    def __init__(self, name, rating): 
+        self.name = name
+        self.rating = ''
+
+    def __str__(self):
+        return "{} : {}".format(self.name, self.rating)
+    
+
+
 API_KEY = secrets.API_KEY
 baseurl = 'https://api.yelp.com'
 SEARCH_PATH = '/v3/businesses/search'
@@ -77,7 +88,7 @@ def request_1(host, path, api_key, url_params=None):
     headers = {
         'Authorization': 'Bearer %s' % api_key,
     }
-    print(u'Querying {0} ...'.format(url))
+    # print(u'Querying {0} ...'.format(url))
     response = requests.request('GET', url, headers=headers, params=url_params)
     json_obj = response.json()
     return write_to_cache_file_1(json_obj)
@@ -88,7 +99,7 @@ def request_2(host, path, api_key, url_params=None):
     headers = {
         'Authorization': 'Bearer %s' % api_key,
     }
-    print(u'Querying {0} ...'.format(url))
+    # print(u'Querying {0} ...'.format(url))
     response = requests.request('GET', url, headers=headers, params=url_params)
     json_obj = response.json()
     return write_to_cache_file_2(json_obj)    
@@ -96,7 +107,7 @@ def request_2(host, path, api_key, url_params=None):
 def write_to_cache_file_1(json_obj):
     with open(CACHE_FNAME_1, 'w') as outfile:
         json.dump(json_obj, outfile)
-    print('write_to_cache_file')    
+    # print('write_to_cache_file')    
     try:
         cache_file = open(CACHE_FNAME_1, 'r')
         cache_contents = cache_file.read()
@@ -111,7 +122,7 @@ def write_to_cache_file_1(json_obj):
 def write_to_cache_file_2(json_obj):
     with open(CACHE_FNAME_2, 'w') as outfile:
         json.dump(json_obj, outfile)
-    print('write_to_cache_file')    
+    # print('write_to_cache_file')    
     try:
         cache_file = open(CACHE_FNAME_1, 'r')
         cache_contents = cache_file.read()
@@ -128,7 +139,7 @@ DB_NAME = 'final.sqlite'
 def init_db(db_name):
     try:
         con = sqlite3.connect(DB_NAME)
-        print(sqlite3.version)
+        # print(sqlite3.version)
     except Error as e:
         print(e)
     
@@ -161,7 +172,7 @@ def init_db(db_name):
     con.commit()
     con.close()
 
-    print('DB is initiated')
+    # print('DB is initiated')
 
 init_db(DB_NAME)
 
@@ -190,7 +201,7 @@ def insert_to_yelp(CACHE_DICTION):
         cur.execute("INSERT INTO 'Yelp' VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)", (dic['name'], dic['url'], dic['rating'], dic['location']['city'], dic['location']['state'], dic['coordinates']['latitude'], dic['coordinates']['longitude']))
 
     con.commit()
-    print('insert successful')
+    # print('insert successful')
     con.close()
 
 
@@ -212,11 +223,11 @@ def make_request_using_cache(url):
     unique_ident = get_unique_key(url)
 
     if unique_ident in CACHE_DICTION:
-        print("Getting cached data...")
+        # print("Getting cached data...")
         return CACHE_DICTION[unique_ident]
 
     else:
-        print("Making a request for new data...")
+        # print("Making a request for new data...")
         resp = requests.get(url)
         CACHE_DICTION[unique_ident] = resp.text
         dumped_json_cache = json.dumps(CACHE_DICTION)
@@ -232,7 +243,7 @@ DB_NAME = 'final.sqlite'
 def init_db(db_name):
     try:
         con = sqlite3.connect(DB_NAME)
-        print(sqlite3.version)
+        # print(sqlite3.version)
     except Error as e:
         print(e)
     
@@ -260,7 +271,7 @@ def init_db(db_name):
     con.commit()
     con.close()
 
-    print('DB is initiated')
+    # print('DB is initiated')
 
 init_db(DB_NAME)
 
@@ -664,9 +675,6 @@ def load_help_text():
 def interactive_prompt():
     help_text = load_help_text()
     response = ''
-
-    good_inpt_lst_0 = ['bars', 'companies', 'countries', 'regions']
-    good_inpt_lst_1 = ['ratings', 'bars_sold', 'region', 'country', 'sellcountry','sourceregion', 'sellers', 'sources', 'cocoa', 'top', 'bottom' ]
 
     while response != 'exit':
         response = input('Enter a command: ')
