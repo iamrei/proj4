@@ -1,0 +1,30 @@
+
+Commands available:
+
+lunch
+	Description: select dining options 
+        Options: 
+        1) city, state (e.g. Ann Arbor, MI): Specifies a city to get a list of
+           restaurants from Yelp and compare the ratings of the selected 
+           restaurant from Tripadvisor.
+
+dinner
+	Description: select dining options 
+        Options: 
+        1) city, state (e.g. Ann Arbor, MI): Specifies a city to get a list of
+           restaurants from Yelp and compare the ratings of the selected 
+           restaurant from Tripadvisor.
+
+cuisine
+	Description: shows available cuisine types of the selected city
+        cuisine types presentation options (bar/pie): see cuisine types of
+        restaurant in the city with bar/pie chart.
+
+map
+	Description: Lists restaurants according to the specified location 
+        and locate the selected restaurant on the map.
+
+help
+	Description: shows this document to understand how this program works.
+
+Recommendation: select lunch/dinner > cuisine > select map to get the best results. 
